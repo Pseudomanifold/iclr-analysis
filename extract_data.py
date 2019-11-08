@@ -54,10 +54,10 @@ def extract_data_from_review(review):
         'sdev_subjectivity': np.std(subjectivities)
     }
 
-    if confidence:
+    if confidence is not None:
         result['confidence'] = confidence
 
-    if experience:
+    if experience is not None:
         result['experience'] = experience
 
     return result
