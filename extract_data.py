@@ -17,7 +17,7 @@ experience_to_score = {
 
 
 def extract_data_from_review(review):
-    
+
     rating = review['rating']
     rating = rating.split(':')[0]
 
