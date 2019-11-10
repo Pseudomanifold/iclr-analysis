@@ -15,6 +15,16 @@ df = pd.read_csv('2020.csv', index_col='review_id')
 df['experience'] = df.experience.astype('category')
 df['rating'] = df.rating.astype('category')
 
+plt.figure(figsize=(8, 5))
+
+ax = sns.distplot(df['n_words'], kde=False)
+
+ax.set_xlabel('Number of words')
+ax.set_ylabel('Count')
+
+plt.tight_layout()
+plt.savefig('ICLR_2020_histogram_words.svg')
+
 plt.figure(figsize=(4, 5))
 
 ax = sns.boxplot(x=df['rating'], y=df['n_words'], data=df)
@@ -54,13 +64,11 @@ plt.savefig('ICLR_2020_boxplots_03.svg')
 
 plt.clf()
 
-g = sns.FacetGrid(data=df, row='experience', hue='rating')
-g = g.map(sns.countplot, 'rating')
+g = sns.FacetGrid(data=df, col='experience', hue='rating')
+g = g.map(sns.countplot, 'rating', order=sorted(df['rating'].unique()))
 
-#ax.set_xlabel('Experience')
-#ax.set_ylabel('Rating')
+g.set_axis_labels('Rating')
+g.set_titles('Experience = {col_name}')
 
 plt.tight_layout()
-plt.savefig('ICLR_2020_boxplots_04.svg')
-
-plt.show()
+plt.savefig('ICLR_2020_countplot.svg')
