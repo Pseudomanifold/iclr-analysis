@@ -12,7 +12,8 @@ import seaborn as sns
 sns.set_style("dark")
 
 df = pd.read_csv('2020.csv', index_col='review_id')
-df['experience'] = df.experience.astype('category')
+df['experience'] = df['experience'].astype('int')
+df['experience'] = df['experience'].astype('category')
 df['rating'] = df.rating.astype('category')
 
 plt.figure(figsize=(8, 5))
