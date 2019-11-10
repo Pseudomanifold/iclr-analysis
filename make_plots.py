@@ -13,6 +13,7 @@ sns.set_style("dark")
 
 df = pd.read_csv('2020.csv', index_col='review_id')
 df['experience'] = df.experience.astype('category')
+df['rating'] = df.rating.astype('category')
 
 plt.figure(figsize=(4, 5))
 
@@ -22,7 +23,7 @@ ax.set_xlabel('Rating')
 ax.set_ylabel('Number of words')
 
 plt.tight_layout()
-plt.savefig('ICLR_2020_boxplots.svg')
+plt.savefig('ICLR_2020_boxplots_01.svg')
 
 plt.clf()
 
@@ -32,7 +33,7 @@ ax.set_xlabel('Experience')
 ax.set_ylabel('Number of words')
 
 plt.tight_layout()
-plt.savefig('ICLR_2020_boxplots_experience.svg')
+plt.savefig('ICLR_2020_boxplots_02.svg')
 
 plt.clf()
 
@@ -49,6 +50,17 @@ g.set_axis_labels('Rating', 'Number of words')
 g.set_titles('Experience = {col_name}')
 
 plt.tight_layout()
-plt.savefig('ICLR_2020_boxplots_categories.svg')
+plt.savefig('ICLR_2020_boxplots_03.svg')
+
+plt.clf()
+
+g = sns.FacetGrid(data=df, row='experience', hue='rating')
+g = g.map(sns.countplot, 'rating')
+
+#ax.set_xlabel('Experience')
+#ax.set_ylabel('Rating')
+
+plt.tight_layout()
+plt.savefig('ICLR_2020_boxplots_04.svg')
 
 plt.show()
